@@ -20,7 +20,10 @@ export function observable(target) {
         return state[PREFIX + key];
       },
       set: function (value) {
-        state[PREFIX + key] = value;
+        if (state[PREFIX + key] !== value) {
+          state[PREFIX + key] = value;
+        }
+
         publish();
       },
     });
