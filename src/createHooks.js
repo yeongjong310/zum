@@ -21,7 +21,10 @@ export function createHooks(callback) {
     return [currentState[thisOrder], setState];
   }
 
-  function resetContext() {}
+  function resetContext() {
+    currentState = [...nextState];
+    order = 0;
+  }
 
   return { useState, resetContext };
 }
