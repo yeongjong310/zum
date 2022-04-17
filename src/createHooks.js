@@ -1,5 +1,6 @@
 export function createHooks(callback) {
   let currentState = [];
+  let nextState = [];
   let order = 0;
 
   function useState(value) {
@@ -11,6 +12,9 @@ export function createHooks(callback) {
     }
 
     const setState = (value) => {
+      if (nextState[thisOrder] === value || currentState[thisOrder] === value)
+        return;
+      nextState[thisOrder] = value;
       callback();
     };
 
