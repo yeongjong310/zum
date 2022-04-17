@@ -1,4 +1,7 @@
-export function observe(callback) {
+const computeList = [];
+
+export function observe(compute) {
+  computeList.push(compute);
   publish();
 }
 
@@ -26,4 +29,10 @@ export function observable(target) {
   return state;
 }
 
-function publish() {}
+function publish() {
+  computeList.forEach((item) => {
+    if (typeof item === "function") {
+      item();
+    }
+  });
+}
