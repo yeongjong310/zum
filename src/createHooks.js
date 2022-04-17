@@ -1,9 +1,18 @@
 export function createHooks(callback) {
+  function useState(value) {
+    let state;
 
-  function useState(){}
+    // initialize
+    if (value) {
+      state = value;
+    }
 
-  function resetContext(){}
+    const setState = () => {};
+
+    return [state, setState];
+  }
+
+  function resetContext() {}
 
   return { useState, resetContext };
-
 }
