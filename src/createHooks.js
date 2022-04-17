@@ -7,7 +7,9 @@ export function createHooks(callback) {
       state = value;
     }
 
-    const setState = () => {};
+    const setState = () => {
+      callback();
+    };
 
     return [state, setState];
   }
