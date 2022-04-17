@@ -20,10 +20,18 @@ export function observable(target) {
         return state[PREFIX + key];
       },
       set: function (value) {
-        if (state[PREFIX + key] !== value) {
-          state[PREFIX + key] = value;
+        if (Array.isArray(value)) {
+          let isSameArray = true;
+          for (let i = 0; i < value.length; i++) {
+            if (value[i] !== state[PREFIX + key][i]) {
+              isSameArray = false;
+              break;
+            }
+          }
+          if (isSameArray) return;
         }
 
+        state[PREFIX + key] = value;
         publish();
       },
     });
