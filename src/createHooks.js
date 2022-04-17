@@ -1,17 +1,20 @@
 export function createHooks(callback) {
+  let currentState = [];
+  let order = 0;
+
   function useState(value) {
-    let state;
+    const thisOrder = order++;
 
     // initialize
-    if (value) {
-      state = value;
+    if (value && !currentState[thisOrder]) {
+      currentState[thisOrder] = value;
     }
 
-    const setState = () => {
+    const setState = (value) => {
       callback();
     };
 
-    return [state, setState];
+    return [currentState[thisOrder], setState];
   }
 
   function resetContext() {}
